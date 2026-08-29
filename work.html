@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Selected Work in Greater Ottawa | Northline</title>
+    <title>Real Work | OCR Design</title>
     <meta
       name="description"
-      content="Selected Northline projects across Greater Ottawa: kitchens, additions, custom homes, and commercial fit-ups in Westboro, The Glebe, Kanata, and Rockcliffe Park."
+      content="Job-site photos from OCR Design — Ottawa Construction and Renovation. Exteriors, kitchens, bathrooms, demolition, and framing."
     />
     <link rel="canonical" href="https://northlinestudio.ca/work.html" />
     <meta name="robots" content="index, follow" />
@@ -14,24 +14,64 @@
     <link rel="icon" type="image/svg+xml" href="public/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://images.pexels.com" />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="assets/styles.css" />
   </head>
   <body>
     <header class="site-header" id="site-header"></header>
-    <main class="section">
-      <div class="wrap">
-        <p class="kicker">The portfolio</p>
-        <h1 class="display" style="font-size: clamp(40px, 7vw, 64px); margin: 12px 0 0">
-          Selected work across Greater Ottawa.
-        </h1>
-        <p class="lede" style="margin-top: 16px">
-          Kitchens, additions, custom homes, and commercial fit-ups. Each project ran on a written
-          scope and a fixed price.
-        </p>
-        <div class="work-grid" id="work-grid" style="margin-top: 64px"></div>
-      </div>
+    <main>
+      <section class="section" style="padding-bottom: 24px">
+        <div class="wrap">
+          <p class="kicker">The portfolio</p>
+          <h1 class="display" style="font-size: clamp(40px, 7vw, 64px); margin: 12px 0 0">
+            Real work from our sites.
+          </h1>
+          <p class="lede" style="margin-top: 16px">
+            Fifteen years on the tools. Full construction and renovation — the photographs below
+            are from completed jobs.
+          </p>
+        </div>
+      </section>
+
+      <section class="section band-dark" style="padding-top: 48px">
+        <div class="wrap">
+          <p class="kicker">Exterior transition</p>
+          <h2>The same elevation, weeks apart.</h2>
+          <p class="lede">A swift transition from open sheathing to stone, siding, and finished windows.</p>
+          <div class="compare" id="home-compare">
+            <img
+              src="assets/work/exterior-after.png"
+              alt="Finished exterior with stone, siding, and black windows"
+              width="1200"
+              height="750"
+              decoding="async"
+            />
+            <div class="compare-before">
+              <img
+                src="assets/work/exterior-before.png"
+                alt="Home during exterior demolition"
+                width="1200"
+                height="750"
+                decoding="async"
+              />
+            </div>
+            <div class="compare-line"><span class="compare-handle">↔</span></div>
+            <input type="range" min="2" max="98" value="48" aria-label="Compare exterior before and after" />
+            <span class="compare-label left">BEFORE</span>
+            <span class="compare-label right">AFTER</span>
+          </div>
+          <button type="button" class="deck" data-deck="exterior" aria-label="More elevation photos"></button>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <p class="kicker">The portfolio</p>
+          <h2>Our Work. Your Vision.</h2>
+          <p class="lede">Explore the spaces that we lately transformed, renovated, and built from the ground up.</p>
+          <div class="work-grid" id="work-grid"></div>
+        </div>
+      </section>
     </main>
     <footer class="site-footer" id="site-footer"></footer>
     <script src="assets/app.js"></script>

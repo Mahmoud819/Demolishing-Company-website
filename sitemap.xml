@@ -6,25 +6,18 @@
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
-      <image:loc>https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg</image:loc>
-      <image:title>House framing under construction in Greater Ottawa</image:title>
-      <image:geo_location>Greater Ottawa, Ontario, Canada</image:geo_location>
+      <image:loc>https://northlinestudio.ca/assets/work/kitchen-done.png</image:loc>
+      <image:title>Finished kitchen by OCR Design</image:title>
     </image:image>
     <image:image>
-      <image:loc>https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg</image:loc>
-      <image:title>Custom home in Greater Ottawa</image:title>
-      <image:geo_location>Greater Ottawa, Ontario, Canada</image:geo_location>
+      <image:loc>https://northlinestudio.ca/assets/work/exterior-after.png</image:loc>
+      <image:title>Finished exterior elevation by OCR Design</image:title>
     </image:image>
-  </url>
-  <url>
-    <loc>https://northlinestudio.ca/greater-ottawa.html</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://northlinestudio.ca/work.html</loc>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://northlinestudio.ca/contact.html</loc>
@@ -32,43 +25,18 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://northlinestudio.ca/project.html?slug=westboro-highland</loc>
+    <loc>https://northlinestudio.ca/project.html?slug=exterior-envelope</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg</image:loc>
-      <image:title>The Highland Modern renovation in Westboro, Greater Ottawa</image:title>
-      <image:geo_location>Westboro, Greater Ottawa, Ontario, Canada</image:geo_location>
-    </image:image>
   </url>
   <url>
-    <loc>https://northlinestudio.ca/project.html?slug=glebe-first-avenue</loc>
+    <loc>https://northlinestudio.ca/project.html?slug=kitchen-calacatta</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg</image:loc>
-      <image:title>Heritage restoration in The Glebe, Greater Ottawa</image:title>
-      <image:geo_location>The Glebe, Greater Ottawa, Ontario, Canada</image:geo_location>
-    </image:image>
   </url>
   <url>
-    <loc>https://northlinestudio.ca/project.html?slug=kanata-march-road</loc>
+    <loc>https://northlinestudio.ca/project.html?slug=bathroom-tile</loc>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg</image:loc>
-      <image:title>Office fit-up in Kanata, Greater Ottawa</image:title>
-      <image:geo_location>Kanata, Greater Ottawa, Ontario, Canada</image:geo_location>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://northlinestudio.ca/project.html?slug=rockcliffe-new-build</loc>
-    <changefreq>yearly</changefreq>
-    <priority>0.7</priority>
-    <image:image>
-      <image:loc>https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg</image:loc>
-      <image:title>Custom new home in Rockcliffe Park, Greater Ottawa</image:title>
-      <image:geo_location>Rockcliffe Park, Greater Ottawa, Ontario, Canada</image:geo_location>
-    </image:image>
   </url>
 </urlset>

@@ -1,81 +1,104 @@
-const PHONE = "(613) 728-4410";
-const PHONE_HREF = "tel:+16137284410";
+const PHONE = "(613) 618-3477";
+const PHONE_HREF = "tel:+16136183477";
 const EMAIL = "hello@northlinestudio.ca";
-const ADDRESS = "412 Richmond Road, Suite 200, Ottawa, ON K2A 0G6";
 const SITE = "https://northlinestudio.ca";
+const BRAND = "OCR Design";
+const BRAND_LONG = "Ottawa Construction and Renovation";
 
 const PHOTO = {
-  frame: "https://images.pexels.com/photos/2219024/pexels-photo-2219024.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  house: "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  westboro: "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  glebe: "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  glebeAfter: "https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  kanata: "https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  kanataBefore: "https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  rockcliffe: "https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1200",
-  bath: "https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=1200",
+  exteriorBefore: "assets/work/exterior-before.png",
+  exteriorAfter: "assets/work/exterior-after.png",
+  kitchen: "assets/work/kitchen-done.png",
+  bathroom: "assets/work/bathroom.png",
 };
 
 function photoTag(src, alt, extra = "") {
-  return `<img src="${src}" alt="${alt}" width="1200" height="800" decoding="async" ${extra} onerror="this.onerror=null;this.src='${PHOTO.frame}'">`;
+  return `<img src="${src}" alt="${alt}" width="1200" height="800" decoding="async" ${extra}>`;
+}
+
+const DECKS = {
+  kitchen: {
+    title: "Kitchen",
+    photos: [
+      "assets/work/deck/kitchen-quartz.png",
+      "assets/work/deck/kitchen-island.png",
+      "assets/work/deck/kitchen-cabinets.png",
+      "assets/work/deck/kitchen-set.png",
+    ],
+  },
+  bathroom: {
+    title: "Bathroom",
+    photos: [
+      "assets/work/deck/bath-tile.png",
+      "assets/work/deck/bath-field.png",
+      "assets/work/deck/bath-open.png",
+      "assets/work/deck/bath-rough.png",
+    ],
+  },
+  exterior: {
+    title: "Elevation",
+    photos: [
+      "assets/work/deck/elev-wrap.png",
+      "assets/work/deck/elev-windows.png",
+      "assets/work/deck/elev-framing.png",
+      "assets/work/deck/elev-open.png",
+      "assets/work/deck/elev-drywall.png",
+      "assets/work/deck/elev-demo.png",
+    ],
+  },
+};
+
+function deckMarkup(key) {
+  const deck = DECKS[key];
+  if (!deck) return "";
+  const peek = deck.photos.slice(0, 3);
+  return `
+    <button type="button" class="deck" data-deck="${key}" aria-label="More ${deck.title} photos">
+      ${peek
+        .map(
+          (src, i) =>
+            `<span class="deck-card" style="--i:${i}"><img src="${src}" alt="" width="400" height="280" decoding="async"></span>`,
+        )
+        .join("")}
+      <span class="deck-more">${deck.photos.length} more photos</span>
+    </button>`;
 }
 
 const projects = {
-  "westboro-highland": {
-    name: "The Highland Modern",
-    neighbourhood: "Westboro",
-    street: "Highland Avenue",
-    type: "Full home renovation",
-    year: "2025",
-    summary: "A 1960s bungalow opened to the river light — kitchen, living, and a quiet primary suite.",
+  "exterior-envelope": {
+    name: "Exterior",
+    phase: "Finished elevation",
+    type: "Stone, siding, and windows",
+    year: "2026",
+    summary: "The same elevation from open OSB to stone, dark siding, and black-framed windows.",
     story:
-      "The clients wanted to stay on Highland rather than chase a new listing. We kept the roof line, moved two bearing walls, and rebuilt the kitchen as a long gallery facing west. Procurement happened in week two, not week twelve, which is why the quartz and millwork arrived before the drywall closed.",
-    scope: ["Open-concept kitchen", "Primary ensuite", "Hardwood throughout", "Panel upgrade"],
-    image: PHOTO.westboro,
-    before: PHOTO.frame,
-    after: PHOTO.westboro,
+      "This is the house after the envelope is on: stone on the first floor, dark lap siding above, and the window package set. Drag the slider on the home page to see it against the open sheathing.",
+    scope: ["Exterior demolition", "Window package", "Stone masonry", "Lap siding"],
+    image: PHOTO.exteriorAfter,
+    before: PHOTO.exteriorBefore,
+    after: PHOTO.exteriorAfter,
   },
-  "glebe-first-avenue": {
-    name: "Heritage Restoration",
-    neighbourhood: "The Glebe",
-    street: "First Avenue",
-    type: "Addition & restoration",
-    year: "2025",
-    summary: "A rear addition that defers to the street, with a kitchen that finally matches how the family cooks.",
+  "kitchen-calacatta": {
+    name: "Kitchen",
+    phase: "Finished",
+    type: "Kitchen renovation",
+    year: "2026",
+    summary: "Quartz, shaker cabinets, and a peninsula built to cook in.",
     story:
-      "Heritage overlay meant the façade stayed honest. The new work is behind: a two-storey addition, restored trim, and a kitchen that does not pretend the house was built last year. We sat with the City early, which saved a redesign cycle most Glebe jobs still pay for.",
-    scope: ["Rear addition", "Kitchen", "Trim restoration", "Permit package"],
-    image: PHOTO.glebe,
-    before: PHOTO.frame,
-    after: PHOTO.glebeAfter,
+      "One kitchen, finished. Stone, cabinets, and the range landed after the mechanicals were closed.",
+    scope: ["Custom cabinets", "Quartz counters", "Undermount sink", "Range and hood"],
+    image: PHOTO.kitchen,
   },
-  "kanata-march-road": {
-    name: "Tech HQ Fit-Up",
-    neighbourhood: "Kanata North",
-    street: "March Road",
-    type: "Commercial office",
-    year: "2024",
-    summary: "An 8,400 sq.ft. office that opened on a Monday because the fire plan was written in week one.",
+  "bathroom-tile": {
+    name: "Bathroom",
+    phase: "On site",
+    type: "Bathroom renovation",
+    year: "2026",
+    summary: "Tile set on a wet-room wall — the job, not a showroom board.",
     story:
-      "The brief was speed without a punch-list hangover. We sequenced after-hours trades, locked the millwork shop drawings before demolition, and treated the sprinkler and alarm drawings as the schedule, not an afterthought.",
-    scope: ["Open studio floor", "Meeting rooms", "Fire-code package", "After-hours build"],
-    image: PHOTO.kanata,
-    before: PHOTO.kanataBefore,
-    after: PHOTO.kanata,
-  },
-  "rockcliffe-new-build": {
-    name: "Cedar Court House",
-    neighbourhood: "Rockcliffe Park",
-    street: "Cedar Court",
-    type: "Custom new home",
-    year: "2025",
-    summary: "A quiet new house that sits in the trees rather than performing for the street.",
-    story:
-      "New build on a constrained lot. The architecture is restrained; the engineering is not. Geothermal, a hidden garage, and millwork that was ordered while the foundation was still a drawing. Occupancy landed in the week we wrote on the first schedule.",
-    scope: ["Custom new home", "Geothermal", "Site-specific millwork", "Landscape coordination"],
-    image: PHOTO.rockcliffe,
-    before: PHOTO.frame,
-    after: PHOTO.house,
+      "One bathroom frame. Waterproofing and large-format tile in the order that keeps the field from moving later.",
+    scope: ["Waterproofing", "Large-format tile", "Leveling system", "Plumbing rough-in"],
+    image: PHOTO.bathroom,
   },
 };
 
@@ -85,44 +108,45 @@ function mountChrome() {
   if (header) {
     header.innerHTML = `
       <div class="wrap header-inner">
-        <a class="logo" href="index.html">NORTHLINE<span>.</span></a>
+        <a class="logo" href="index.html">OCR DESIGN<span>.</span><small>${BRAND_LONG}</small></a>
         <nav class="nav">
           <a href="work.html">Projects</a>
-          <a href="greater-ottawa.html">Greater Ottawa</a>
           <a href="index.html#services">Services</a>
+          <a href="index.html#transition">Exterior</a>
           <a href="contact.html">Contact us</a>
         </nav>
         <div class="header-cta">
-          <a class="btn btn-outline" href="index.html#visit">Get a quote</a>
+          <a class="btn btn-outline" href="${PHONE_HREF}">${PHONE}</a>
         </div>
         <button class="menu-toggle" type="button" id="menu-toggle">Menu</button>
       </div>
       <div class="wrap mobile-nav hidden" id="mobile-nav">
         <a href="work.html">Projects</a>
-        <a href="greater-ottawa.html">Greater Ottawa</a>
         <a href="index.html#services">Services</a>
+        <a href="index.html#transition">Exterior</a>
         <a href="contact.html">Contact us</a>
-        <a href="index.html#visit">Get a quote</a>
+        <a href="${PHONE_HREF}">Call ${PHONE}</a>
       </div>`;
   }
   if (footer) {
     footer.innerHTML = `
       <div class="wrap footer-grid">
         <div>
-          <p class="kicker">NORTHLINE.</p>
+          <p class="kicker">${BRAND}.</p>
           <h2>Building dreams, constructing realities.</h2>
+          <p class="fine" style="margin-top:12px">${BRAND_LONG}</p>
         </div>
         <div>
-          <p style="color:#fff">Visit the design centre</p>
-          <p>${ADDRESS}</p>
+          <p style="color:#fff">Book a site visit</p>
+          <p>By phone appointment only.<br>We come to the job site.</p>
           <p><a href="${PHONE_HREF}">${PHONE}</a><br><a href="mailto:${EMAIL}">${EMAIL}</a></p>
         </div>
         <div>
           <p><a href="work.html">Selected work</a></p>
-          <p><a href="greater-ottawa.html">Greater Ottawa areas</a></p>
-          <p><a href="index.html#visit">Book an in-home visit</a></p>
+          <p><a href="index.html#transition">Exterior transition</a></p>
+          <p><a href="index.html#visit">Request a callback</a></p>
           <p><a href="contact.html">Contact</a></p>
-          <p class="fine">Serving Greater Ottawa — Westboro, The Glebe, Kanata, Barrhaven, Orléans, Nepean, Stittsville, Rockcliffe Park, and nearby communities. Fully insured. WSIB covered. Fixed-price contracts.</p>
+          <p class="fine">Fully insured. WSIB covered. Fixed-price contracts. Site visits by appointment on the phone.</p>
         </div>
       </div>`;
   }
@@ -141,34 +165,13 @@ function mountSchema() {
   script.textContent = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "GeneralContractor",
-    name: "Northline",
+    name: BRAND,
+    alternateName: BRAND_LONG,
     url: SITE,
     telephone: PHONE,
     email: EMAIL,
-    image: PHOTO.house,
-    address: {
-      "@type": "PostalAddress",
-      streetAddress: "412 Richmond Road, Suite 200",
-      addressLocality: "Ottawa",
-      addressRegion: "ON",
-      postalCode: "K2A 0G6",
-      addressCountry: "CA",
-    },
-    areaServed: [
-      "Greater Ottawa",
-      "Ottawa",
-      "Westboro",
-      "The Glebe",
-      "Kanata",
-      "Barrhaven",
-      "Orléans",
-      "Nepean",
-      "Stittsville",
-      "Rockcliffe Park",
-      "Manotick",
-      "Hintonburg",
-      "New Edinburgh",
-    ].map((name) => ({ "@type": "Place", name })),
+    image: `${SITE}/assets/work/kitchen-done.png`,
+    areaServed: { "@type": "City", name: "Ottawa" },
   });
   document.head.appendChild(script);
 }
@@ -186,11 +189,12 @@ function mountChat() {
         <button type="button" id="chat-close" style="background:none;border:0;color:inherit;cursor:pointer">Close</button>
       </div>
       <div class="chat-body" id="chat-body">
-        <div class="bubble">Hello — this is Alex at the design centre. Tell us what you are building. We are online right now, and a specialist always follows up within 24 hours.</div>
+        <div class="bubble">Hello — this is OCR Design, Ottawa Construction and Renovation. Call ${PHONE} to book a site visit, or tell us what you are building here.</div>
       </div>
       <form class="chat-form" id="chat-form">
         <input class="field" name="name" placeholder="Your name" required>
-        <textarea class="field" name="message" rows="2" placeholder="Kitchen, addition, custom home…" required></textarea>
+        <input class="field" name="phone" type="tel" placeholder="Phone (required)" required>
+        <textarea class="field" name="message" rows="2" placeholder="Kitchen, bathroom, exterior…" required></textarea>
         <button class="btn" type="submit">Send to a specialist</button>
       </form>
     </div>
@@ -213,7 +217,7 @@ function mountChat() {
     body.insertAdjacentHTML(
       "beforeend",
       `<div class="bubble me">${data.get("message")}</div>
-       <div class="bubble">Received, ${data.get("name")}. A project specialist will continue this conversation shortly — usually within the hour, always within 24 hours. No commitment to proceed.</div>`,
+       <div class="bubble">Received, ${data.get("name")}. We will call ${data.get("phone")} to set the site visit. Usually within the hour, always within 24 hours.</div>`,
     );
     event.target.classList.add("hidden");
     body.scrollTop = body.scrollHeight;
@@ -239,7 +243,7 @@ function mountQuoteForms() {
   document.querySelectorAll("[data-quote-form]").forEach((form) => {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
-      form.outerHTML = `<div class="success"><p class="kicker">Visit booked</p><h3>We will confirm your in-home appointment by email.</h3><p>A specialist will come to your home to review the work and give you an exact price. Email is how we confirm — there is no obligation to proceed.</p></div>`;
+      form.outerHTML = `<div class="success"><p class="kicker">Request received</p><h3>We will call to confirm the site visit.</h3><p>A specialist comes to the job site by appointment. Phone is how we confirm — there is no office drop-in, and no obligation to proceed.</p></div>`;
     });
   });
 }
@@ -250,25 +254,25 @@ function mountProjectPage() {
   const slug = new URLSearchParams(location.search).get("slug");
   const project = projects[slug];
   if (!project) {
-    document.title = "Project not found | Northline";
+    document.title = `Project not found | ${BRAND}`;
     root.innerHTML = `<div class="wrap page-hero"><h1 class="display">Project not found.</h1><p><a href="work.html">Back to work</a></p></div>`;
     return;
   }
-  document.title = `${project.name} | ${project.neighbourhood}, Greater Ottawa | Northline`;
+  document.title = `${project.name} | ${BRAND}`;
   const desc = document.querySelector('meta[name="description"]');
-  if (desc) desc.setAttribute("content", `${project.summary} ${project.type} in ${project.neighbourhood}, Greater Ottawa.`);
+  if (desc) desc.setAttribute("content", `${project.summary} ${project.type} by ${BRAND_LONG}.`);
   const canonical = document.querySelector('link[rel="canonical"]');
   if (canonical) canonical.setAttribute("href", `${SITE}/project.html?slug=${slug}`);
   root.innerHTML = `
     <section class="hero-dark" style="padding-bottom:48px">
       <div class="wrap">
-        <p class="kicker">${project.neighbourhood} · ${project.street}</p>
+        <p class="kicker">${project.phase}</p>
         <h1 style="font-size:clamp(40px,6vw,64px);margin:12px 0 8px">${project.name}</h1>
         <p style="color:rgb(255 255 255 / 0.75)">${project.type} · ${project.year}</p>
       </div>
     </section>
     <div class="wrap" style="padding:32px 0 0">
-      ${photoTag(project.image, project.name + " in " + project.neighbourhood + ", Greater Ottawa", 'style="width:100%;border-radius:28px;aspect-ratio:16/8;object-fit:cover"')}
+      ${photoTag(project.image, project.name + " by " + BRAND, 'style="width:100%;border-radius:28px;aspect-ratio:16/9;object-fit:cover"')}
     </div>
     <section class="section">
       <div class="wrap split">
@@ -279,23 +283,27 @@ function mountProjectPage() {
         <ul style="margin:0;padding:0;list-style:none">${project.scope.map((item) => `<li style="padding:14px 0;border-bottom:1px solid var(--line);font-size:18px">${item}</li>`).join("")}</ul>
       </div>
     </section>
-    <section class="section band-dark">
+    ${
+      project.before && project.after
+        ? `<section class="section band-dark">
       <div class="wrap">
-        <h2>From raw to refined</h2>
+        <h2>The elevation, before and after</h2>
         <div class="compare" id="project-compare">
-          ${photoTag(project.after, project.name + " completed in Greater Ottawa")}
-          <div class="compare-before">${photoTag(project.before, project.name + " during construction in Greater Ottawa")}</div>
+          ${photoTag(project.after, project.name + " finished")}
+          <div class="compare-before">${photoTag(project.before, project.name + " during construction")}</div>
           <div class="compare-line"><span class="compare-handle">↔</span></div>
-          <input type="range" min="2" max="98" value="48" aria-label="Compare construction and completion">
-          <span class="compare-label left">IN PROGRESS</span>
-          <span class="compare-label right">COMPLETE</span>
+          <input type="range" min="2" max="98" value="48" aria-label="Compare construction stages">
+          <span class="compare-label left">BEFORE</span>
+          <span class="compare-label right">AFTER</span>
         </div>
       </div>
-    </section>
+    </section>`
+        : ""
+    }
     <section class="section">
       <div class="wrap" style="display:flex;justify-content:space-between;align-items:center">
         <a href="work.html">All projects</a>
-        <a class="btn" href="contact.html">Start a similar project →</a>
+        <a class="btn" href="${PHONE_HREF}">Call to start a similar job →</a>
       </div>
     </section>`;
   mountSlider("project-compare");
@@ -303,21 +311,88 @@ function mountProjectPage() {
 
 function workCards() {
   return Object.entries(projects)
-    .map(
-      ([slug, project]) => `
-      <a href="project.html?slug=${slug}">
-        ${photoTag(project.image, project.name + " — " + project.type + " in " + project.neighbourhood + ", Greater Ottawa", 'loading="lazy"')}
-        <div class="work-meta">
-          <div>
-            <p class="kicker">${project.neighbourhood}</p>
-            <h3>${project.name}</h3>
+    .map(([slug, project]) => {
+      const deckKey = slug.startsWith("kitchen") ? "kitchen" : slug.startsWith("bathroom") ? "bathroom" : "";
+      return `
+      <article>
+        <a class="shot-main" href="project.html?slug=${slug}">
+          ${photoTag(project.image, project.name + " — " + project.type, 'loading="lazy"')}
+        </a>
+        ${deckKey ? deckMarkup(deckKey) : ""}
+        <a href="project.html?slug=${slug}">
+          <div class="work-meta">
+            <div>
+              <p class="kicker">${project.phase}</p>
+              <h3>${project.name}</h3>
+            </div>
           </div>
-          <p class="fine">${project.street}</p>
-        </div>
-        <p class="fine">${project.type}</p>
-      </a>`,
-    )
+          <p class="fine">${project.type}</p>
+        </a>
+      </article>`;
+    })
     .join("");
+}
+
+function fillDecks() {
+  document.querySelectorAll(".deck[data-deck]").forEach((el) => {
+    if (el.querySelector(".deck-card")) return;
+    el.outerHTML = deckMarkup(el.dataset.deck);
+  });
+}
+
+function mountDecks() {
+  fillDecks();
+  document.querySelectorAll(".deck[data-deck]").forEach((btn) => {
+    btn.addEventListener("click", () => openDeck(btn.dataset.deck));
+  });
+}
+
+function openDeck(key) {
+  const deck = DECKS[key];
+  if (!deck) return;
+  let index = 0;
+  const root = document.createElement("div");
+  root.className = "lightbox";
+  root.setAttribute("role", "dialog");
+  const draw = () => {
+    root.innerHTML = `
+      <div class="lightbox-bar">
+        <div>
+          <p class="kicker">${deck.title}</p>
+          <div>${index + 1} / ${deck.photos.length}</div>
+        </div>
+        <button type="button" data-close>Close</button>
+      </div>
+      <div class="lightbox-stage">
+        <img src="${deck.photos[index]}" alt="${deck.title} photo ${index + 1}">
+      </div>
+      <div class="lightbox-nav">
+        <button type="button" data-prev>Previous</button>
+        <button type="button" data-next>Next</button>
+      </div>`;
+  };
+  draw();
+  const onKey = (event) => {
+    if (event.key === "Escape") close();
+    if (event.key === "ArrowRight") step(1);
+    if (event.key === "ArrowLeft") step(-1);
+  };
+  const step = (dir) => {
+    index = (index + dir + deck.photos.length) % deck.photos.length;
+    draw();
+  };
+  const close = () => {
+    document.removeEventListener("keydown", onKey);
+    root.remove();
+  };
+  root.addEventListener("click", (event) => {
+    const t = event.target;
+    if (t.dataset.close !== undefined) close();
+    if (t.dataset.next !== undefined) step(1);
+    if (t.dataset.prev !== undefined) step(-1);
+  });
+  document.addEventListener("keydown", onKey);
+  document.body.appendChild(root);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -327,4 +402,5 @@ document.addEventListener("DOMContentLoaded", () => {
   mountProjectPage();
   const grid = document.getElementById("work-grid");
   if (grid) grid.innerHTML = workCards();
+  mountDecks();
 });

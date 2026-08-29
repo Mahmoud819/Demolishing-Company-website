@@ -1,6 +1,6 @@
-# Northline Studio
+# OCR Design
 
-Ottawa new-home and renovation website. The live site is static HTML — no install required.
+Ottawa Construction and Renovation. Static HTML site — no install required.
 
 ## Run it
 
@@ -14,19 +14,11 @@ Then open [http://localhost:5173](http://localhost:5173).
 
 ## What is on the site
 
-Inspired by the strongest pieces of Ottawa design-build and construction-management studios, rewritten as an original brand:
+- Real job-site photography (not stock)
+- Exterior before/after slider
+- Phone-booked site visits — no office address
 
-- Trust pillars: 24-hour response, unbiased advice, no commitment, fixed pricing
-- Quote, 24/7 call, Westboro design centre, and live chat
-- Project simulator using Ottawa-style labour and material rates (kitchen, bath, basement, addition, new home)
-- Cost-overrun / ghosting contrast vs fixed price and a live portal
-- Northline Standard: 20-page scope, dedicated PM, zero-deficiency guarantee
-- Before/after transformation slider
-- Portfolio and case studies
-- No-obligation quote form
+Contact:
 
-Placeholder contact details (swap before going live):
-
-- Phone: (613) 728-4410
-- Design centre: 412 Richmond Road, Suite 200, Ottawa
+- Phone: (613) 618-3477
 - Email: hello@northlinestudio.ca
