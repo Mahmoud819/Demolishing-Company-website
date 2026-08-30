@@ -21,4 +21,4 @@ Then open [http://localhost:5173](http://localhost:5173).
 Contact:
 
 - Phone: (613) 618-3477
-- Email: hello@northlinestudio.ca
+- Email: info@ocrdesign.ca

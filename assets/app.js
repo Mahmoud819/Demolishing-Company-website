@@ -1,6 +1,6 @@
 const PHONE = "(613) 618-3477";
 const PHONE_HREF = "tel:+16136183477";
-const EMAIL = "hello@northlinestudio.ca";
+const EMAIL = "info@ocrdesign.ca";
 const SITE = "https://northlinestudio.ca";
 const BRAND = "OCR Design";
 const BRAND_LONG = "Ottawa Construction and Renovation";
@@ -145,6 +145,7 @@ function mountChrome() {
           <p><a href="work.html">Selected work</a></p>
           <p><a href="index.html#transition">Exterior transition</a></p>
           <p><a href="index.html#visit">Request a callback</a></p>
+          <p><a href="#inquiry">Project inquiry</a></p>
           <p><a href="contact.html">Contact</a></p>
           <p class="fine">Fully insured. WSIB covered. Fixed-price contracts. Site visits by appointment on the phone.</p>
         </div>
@@ -177,51 +178,14 @@ function mountSchema() {
 }
 
 function mountChat() {
-  const root = document.createElement("div");
-  root.className = "chat-wrap";
-  root.innerHTML = `
-    <div class="chat-panel hidden" id="chat-panel">
-      <div class="chat-head">
-        <div>
-          <div class="kicker">Live chat</div>
-          <div>A specialist is available now</div>
-        </div>
-        <button type="button" id="chat-close" style="background:none;border:0;color:inherit;cursor:pointer">Close</button>
-      </div>
-      <div class="chat-body" id="chat-body">
-        <div class="bubble">Hello — this is OCR Design, Ottawa Construction and Renovation. Call ${PHONE} to book a site visit, or tell us what you are building here.</div>
-      </div>
-      <form class="chat-form" id="chat-form">
-        <input class="field" name="name" placeholder="Your name" required>
-        <input class="field" name="phone" type="tel" placeholder="Phone (required)" required>
-        <textarea class="field" name="message" rows="2" placeholder="Kitchen, bathroom, exterior…" required></textarea>
-        <button class="btn" type="submit">Send to a specialist</button>
-      </form>
-    </div>
-    <button class="btn" id="chat-open" type="button">Live chat — online</button>`;
-  document.body.appendChild(root);
-  const panel = document.getElementById("chat-panel");
-  document.getElementById("chat-open").onclick = () => {
-    const open = !panel.classList.contains("hidden");
-    panel.classList.toggle("hidden", open);
-    document.getElementById("chat-open").textContent = open ? "Live chat — online" : "Hide chat";
-  };
-  document.getElementById("chat-close").onclick = () => {
-    panel.classList.add("hidden");
-    document.getElementById("chat-open").textContent = "Live chat — online";
-  };
-  document.getElementById("chat-form").onsubmit = (event) => {
-    event.preventDefault();
-    const data = new FormData(event.target);
-    const body = document.getElementById("chat-body");
-    body.insertAdjacentHTML(
-      "beforeend",
-      `<div class="bubble me">${data.get("message")}</div>
-       <div class="bubble">Received, ${data.get("name")}. We will call ${data.get("phone")} to set the site visit. Usually within the hour, always within 24 hours.</div>`,
-    );
-    event.target.classList.add("hidden");
-    body.scrollTop = body.scrollHeight;
-  };
+  if (window.OCRInquiry) {
+    window.OCRInquiry.mount();
+    return;
+  }
+  const script = document.createElement("script");
+  script.src = "assets/chat.js";
+  script.onload = () => window.OCRInquiry?.mount();
+  document.body.appendChild(script);
 }
 
 function mountSlider(id) {
@@ -239,11 +203,57 @@ function mountSlider(id) {
   update();
 }
 
+async function sendInquiryEmail(fields) {
+  const payload = {
+    _subject: fields._subject || `Website inquiry from ${fields.name || "a visitor"}`,
+    _captcha: "false",
+    _template: "table",
+    name: fields.name || "",
+    email: fields.email || EMAIL,
+    phone: fields.phone || "",
+    message: fields.message || "",
+  };
+  Object.keys(fields).forEach((key) => {
+    if (payload[key] === undefined && !key.startsWith("_")) payload[key] = fields[key];
+  });
+  try {
+    const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(EMAIL)}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json().catch(() => ({}));
+    return res.ok && String(data.success) !== "false";
+  } catch {
+    return false;
+  }
+}
+window.sendInquiryEmail = sendInquiryEmail;
+
 function mountQuoteForms() {
   document.querySelectorAll("[data-quote-form]").forEach((form) => {
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async (event) => {
       event.preventDefault();
-      form.outerHTML = `<div class="success"><p class="kicker">Request received</p><h3>We will call to confirm the site visit.</h3><p>A specialist comes to the job site by appointment. Phone is how we confirm — there is no office drop-in, and no obligation to proceed.</p></div>`;
+      const data = new FormData(form);
+      const first = String(data.get("first") || "").trim();
+      const last = String(data.get("last") || "").trim();
+      const name = `${first} ${last}`.trim();
+      const btn = form.querySelector('button[type="submit"]');
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = "Sending…";
+      }
+      const sent = await sendInquiryEmail({
+        _subject: `Site visit request — ${name}`,
+        name,
+        email: String(data.get("email") || "").trim() || EMAIL,
+        phone: String(data.get("phone") || "").trim(),
+        address: String(data.get("address") || "").trim(),
+        date: String(data.get("date") || "").trim(),
+        time: String(data.get("time") || "").trim(),
+        message: String(data.get("project") || "").trim(),
+      });
+      form.outerHTML = `<div class="success"><p class="kicker">Request received</p><h3>We will call to confirm the site visit.</h3><p>A specialist comes to the job site by appointment. Phone is how we confirm — there is no office drop-in, and no obligation to proceed.${sent ? "" : ` If you prefer, email <a href="mailto:${EMAIL}">${EMAIL}</a>.`}</p></div>`;
     });
   });
 }
@@ -272,7 +282,7 @@ function mountProjectPage() {
       </div>
     </section>
     <div class="wrap" style="padding:32px 0 0">
-      ${photoTag(project.image, project.name + " by " + BRAND, 'style="width:100%;border-radius:28px;aspect-ratio:16/9;object-fit:cover"')}
+      ${photoTag(project.image, project.name + " by " + BRAND, 'class="project-shot"')}
     </div>
     <section class="section">
       <div class="wrap split">
