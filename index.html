@@ -2,7 +2,7 @@
 <html lang="en-CA">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>OCR Design | Ottawa Construction and Renovation</title>
     <meta
       name="description"
@@ -43,21 +43,25 @@
           </div>
         </div>
         <div class="hero-photos">
-          <img
-            src="assets/work/kitchen-done.png"
-            alt="Finished kitchen renovation by OCR Design"
-            width="1200"
-            height="1500"
-            fetchpriority="high"
-            decoding="async"
-          />
-          <img
-            src="assets/work/bathroom.png"
-            alt="Bathroom tile work by OCR Design"
-            width="1200"
-            height="1500"
-            decoding="async"
-          />
+          <div class="photo-frame photo-portrait">
+            <img
+              src="assets/work/kitchen-done.png"
+              alt="Finished kitchen renovation by OCR Design"
+              width="1200"
+              height="1500"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
+          <div class="photo-frame photo-portrait">
+            <img
+              src="assets/work/bathroom.png"
+              alt="Bathroom tile work by OCR Design"
+              width="1200"
+              height="1500"
+              decoding="async"
+            />
+          </div>
         </div>
       </div>
     </section>
@@ -68,9 +72,13 @@
         <h2>We come to the job. Book by phone.</h2>
         <p class="lede">
           There is no showroom to drop in. A specialist visits the site of operation by appointment
-          — call <a href="tel:+16136183477">(613) 618-3477</a> to set the time.
+          — call <a href="tel:+16136183477">(613) 618-3477</a> to set the time, or start a project
+          inquiry.
         </p>
-        <a class="btn" href="tel:+16136183477">Book a site visit →</a>
+        <div class="cta-row">
+          <a class="btn" href="tel:+16136183477">Book a site visit →</a>
+          <button class="btn btn-outline" type="button" data-open-inquiry>Start a project inquiry</button>
+        </div>
       </div>
     </section>
 
@@ -194,6 +202,9 @@
           </p>
           <p style="font-size: 28px; font-weight: 700; margin: 24px 0 0">
             <a href="tel:+16136183477">(613) 618-3477</a>
+          </p>
+          <p style="margin-top: 20px">
+            <button class="btn btn-dark" type="button" data-open-inquiry>Start a project inquiry →</button>
           </p>
         </div>
         <form data-quote-form class="book-form">
